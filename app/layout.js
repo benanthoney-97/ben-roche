@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "OCL Vision",
+  title: "Ben Redmond Roche, PhD",
 };
 
 export default function RootLayout({ children }) {

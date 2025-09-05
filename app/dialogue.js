@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function VoicePage() {
   const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID || "agent_0101k4ca317begyaaaya0gtek97c";
   const heroLogo = process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/Screenshot%202025-09-05%20at%2010.04.52.png";
-  const headerLogo = process.env.NEXT_PUBLIC_HEADER_LOGO_URL || "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-back-100.png";
+  const headerLogo = process.env.NEXT_PUBLIC_HEADER_LOGO_URL || "";
   const businessName = process.env.NEXT_PUBLIC_BRAND_NAME || "Ben Redmond Roche, PhD";
   const businessTagline =
     process.env.NEXT_PUBLIC_BRAND_TAGLINE || "Research Fellow in SRM Research Governance, Department of Earth Science at UCL";
@@ -16,28 +16,12 @@ export default function VoicePage() {
     { label: "Leave a review", href: "#" },
     { label: "View website", href: "#" },
   ];
-const socialLinks = [
-  { 
-    label: "Email", 
-    href: "mailto:b.roche@ucl.ac.uk", 
-    icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-email-100.png" 
-  },
-  { 
-    label: "LinkedIn", 
-    href: "https://www.linkedin.com/in/ben-redmond-roche-09275a152/", 
-    icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-linkedin-100.png" 
-  },
-  { 
-    label: "Google Scholar", 
-    href: "https://scholar.google.com/citations?user=-ZE4BjQAAAAJ&hl=en", 
-    icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-google-scholar-100.png" 
-  },
-  { 
-    label: "Website", 
-    href: "https://www.researchgate.net/profile/Benjamin-Redmond-Roche", 
-    icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-website-100.png" 
-  },
-];
+    const socialLinks = [
+    { label: "Email", href: process.env.NEXT_PUBLIC_SOCIAL_X || "#", icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-email-100.png" },
+    { label: "LinkedIn",    href: process.env.NEXT_PUBLIC_SOCIAL_LINKEDIN || "#", icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-linkedin-100.png" },
+    { label: "Google Scholar", href: process.env.NEXT_PUBLIC_SOCIAL_SCHOLAR || "#", icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-google-scholar-100.png" },
+    { label: "Website",     href: process.env.NEXT_PUBLIC_SOCIAL_WEBSITE || "#", icon: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-website-100.png" },
+  ].filter(s => !!s.href); // hide empties
 
 const gridItems = [
   {
@@ -48,7 +32,7 @@ const gridItems = [
   {
     title: "Assessment of plausible solar radiation modification field experiments from an expert-led workshop reveals the need for differentiated governance",
     image: "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/dialogue-images/session-images/plausible_solar_radiation_modification.png",
-    href: "/srm-governance"
+    href: "/srm-governance-workshop"
   },
 ];
 
@@ -81,33 +65,45 @@ const gridItems = [
       <div className="container">
         {/* Header */}
 <div className="topbar">
+  <div className="topbar-left">
+    {headerLogo ? (
+      // eslint-disable-next-line @next/next/no-img-element
+      <a
+        href="https://www.dialogue-ai.co/service-providers"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={headerLogo} alt="Logo" className="miniLogo" />
+      </a>
+    ) : (
+      <a
+        href="https://www.dialogue-ai.co/service-providers"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div className="miniLogo placeholder" />
+      </a>
+    )}
+  </div>
+
   <button className="shareBtn" aria-label="Share" onClick={onShare}>
     <img
-      src="https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-share-96.png"
+      src="https://ielaigfiyikzxqecyplz.supabase.co/storage/v1/object/public/UI_elements/share.png"
       alt="Share"
       className="shareIcon"
     />
   </button>
 
-<a
-  href={`mailto:ben@dialogue-ai.co?subject=${encodeURIComponent("Recreate Ben Roche's portfolio")}&body=${encodeURIComponent(
-    "Hi Dialogue team,\n\nI'd like to create a version of Ben Roche's Dialogue portfolio for my own work.\n\nThanks!"
-  )}`}
-  className="createdBy"
->
-  Created by Dialogue
-</a>
-
-  {/* Copied toast */}
-  <div
-    className={`toast ${copied ? "show" : ""}`}
-    role="status"
-    aria-live="polite"
-    aria-atomic="true"
-  >
-    Copied!
-  </div>
-</div>
+          {/* Copied toast (top-right near header) */}
+          <div
+            className={`toast ${copied ? "show" : ""}`}
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Copied!
+          </div>
+        </div>
 
         {/* Big circular brand logo */}
         <div className="heroLogoWrap">
@@ -145,14 +141,13 @@ const gridItems = [
                 {/* 2-column grid */}
 <div className="gridWrap">
   {gridItems.map((item) => (
-    <Link key={item.title} href={item.href} className="gridCardLink" aria-label={item.title}>
-      <div className="gridCard">
-        <img src={item.image} alt={item.title} className="gridImage" />
-        <h3 className="gridTitle">{item.title}</h3>
-      </div>
+    <Link key={item.title} href={item.href} className="gridCard" aria-label={item.title}>
+      <img src={item.image} alt={item.title} className="gridImage" />
+      <h3 className="gridTitle">{item.title}</h3>
     </Link>
   ))}
 </div>
+
 
         {/* Links column */}
         <div className="links">
@@ -167,6 +162,9 @@ const gridItems = [
         
 
         {/* ElevenLabs widget (below links) */}
+        <div className="widgetWrap">
+          <elevenlabs-convai agent-id={agentId}></elevenlabs-convai>
+        </div>
       </div>
 
       {/* Widget script */}
@@ -240,29 +238,15 @@ const gridItems = [
             margin-bottom: clamp(8px, 1.6vw, 12px);
           }
         }
-        @media (max-width: 640px) {
-          .socialRow {
-            margin-top: clamp(12px, 2vw, 18px);
-            margin-bottom: clamp(8px, 1.6vw, 12px);
-          }
-                    .socialIcon {
-          width: 25px;
-          height: 25px;
-          object-fit: contain;
-          display: block;
+
+                .gridWrap {
+          width: 100%;
+          max-width: var(--content-max);
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 20px;
+          margin: 20px 0 30px;
         }
-        }
-.gridWrap { /* mobile default */
-  width: 100%;
-  max-width: var(--content-max);
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin: 20px 0 30px;
-}
-@media (min-width: 641px) {
-  .gridWrap { grid-template-columns: 1fr 1fr; }
-}
 
         .gridCard {
           display: flex;
@@ -291,26 +275,8 @@ const gridItems = [
           text-align: left;
           color: #ffffffff;
         }
-          
-
-        .gridCardLink {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-.gridCard { cursor: pointer; transition: transform .12s ease, box-shadow .18s ease; }
+          .gridCard { transition: transform .12s ease, box-shadow .18s ease; }
 .gridCard:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
-
-.createdBy {
-  font-size: 14px;
-  font-weight: 500;
-  color: #e5e7eb;      /* light text for dark background */
-  text-decoration: none;
-}
-
-.createdBy:hover {
-  text-decoration: none;
-}
 
         /* MOBILE/TABLET: whole page blue */
         .page {
@@ -337,16 +303,17 @@ const gridItems = [
         }
 
         /* Top bar */
-.topbar {
-  width: 100%;
-  max-width: var(--content-max);
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* pushes first and last child apart */
-  padding: 4px 2px;
-}
+        .topbar {
+          width: 100%;
+          max-width: var(--content-max);
+          display: none;
+          align-items: center;
+          justify-content: space-between;
+          padding: 4px 2px;
+        }
 
         .miniLogo {
+        
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -390,13 +357,13 @@ const gridItems = [
         }
 
         .shareBtn {
-          display: block;
+          display: none;
           align-items: center;
           justify-content: center;
           width: 40px;
           height: 40px;
           border-radius: 9999px;  /* circular */
-          background: none;
+          background: #ffffff;
           border: 1px solid rgba(0,0,0,0.06);
           box-shadow: 0 2px 10px rgba(0,0,0,0.08);
           cursor: pointer;
@@ -508,12 +475,11 @@ const gridItems = [
           justify-content: center;
           margin-top: clamp(18px, 4vw, 26px);
         }
-          
 
         /* DESKTOP: white around a centered blue container, reduced height */
         @media (min-width: 900px) {
           .page {
-            background: rgba(255, 255, 255, 0.07); /* white page background */
+            background: rgba(179,123,128,.07); /* white page background */
           }
           .container {
             width: min(92vw, 820px);
@@ -527,14 +493,7 @@ const gridItems = [
             background: #15375c;
           }
         }
-          @media (max-width: 640px) {
-  .gridTitle {
-    font-size: 1rem; /* or whatever size feels right */
-  }
-}
-      `
-      
-      }</style>
+      `}</style>
     </div>
   );
 }
