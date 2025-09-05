@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Script from "next/script";
 import Link from "next/link";
 
-export default function VoicePage() {
+export default function Home() {
   const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID || "agent_0101k4ca317begyaaaya0gtek97c";
   const heroLogo = process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/Screenshot%202025-09-05%20at%2010.04.52.png";
   const headerLogo = process.env.NEXT_PUBLIC_HEADER_LOGO_URL || "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/icons8-back-100.png";
@@ -533,7 +533,6 @@ const gridItems = [
   }
 }
       `
-      
       }</style>
     </div>
   );
