@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Hertility Health",
+  title: "OCL Vision",
 };
 
 export default function RootLayout({ children }) {

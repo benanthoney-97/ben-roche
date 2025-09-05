@@ -4,11 +4,11 @@ import Script from "next/script";
 
 export default function VoicePage() {
   const agentId = process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID || "agent_3101k4a029s5ff18qqq2arsbjcwm";
-  const heroLogo = process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/Logo.3c70b1af.svg";
+  const heroLogo = process.env.NEXT_PUBLIC_BRAND_LOGO_URL || "https://aigtrvecjglsbqqzqige.supabase.co/storage/v1/object/public/website_images/ocl-logo.svg";
   const headerLogo = process.env.NEXT_PUBLIC_HEADER_LOGO_URL || "";
-  const businessName = process.env.NEXT_PUBLIC_BRAND_NAME || "Hertility Health (Demo)";
+  const businessName = process.env.NEXT_PUBLIC_BRAND_NAME || "OCL Vision (Demo)";
   const businessTagline =
-    process.env.NEXT_PUBLIC_BRAND_TAGLINE || "Generalised education assistant to help patients feel more at ease throughout treatment with Hertility.";
+    process.env.NEXT_PUBLIC_BRAND_TAGLINE || "Help patients feel more at ease throughout treatment with OCL Vision with this generalised education assistant.";
 
   const links = [
     { label: "Get a quote", href: "#" },
@@ -161,7 +161,7 @@ export default function VoicePage() {
              starts near top (larger gap to reduce height) and reaches bottom */
         .container {
           width: 100%;
-          background: #6b4f54 !important;  /* ensure not overridden */
+          background: #15375c !important;  /* ensure not overridden */
           color: var(--text-blue);
           display: flex;
           flex-direction: column;
@@ -346,7 +346,7 @@ export default function VoicePage() {
         /* DESKTOP: white around a centered blue container, reduced height */
         @media (min-width: 900px) {
           .page {
-            background: #ffffffff; /* white page background */
+            background: rgba(179,123,128,.07); /* white page background */
           }
           .container {
             width: min(92vw, 820px);
@@ -357,7 +357,7 @@ export default function VoicePage() {
             border-top-right-radius: 22px;
             padding: 24px 24px 56px;
             box-shadow: 0 18px 48px rgba(12, 113, 195, 0.22);
-            background: #be6464;
+            background: #15375c;
           }
         }
       `}</style>
