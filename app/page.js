@@ -326,15 +326,18 @@ const gridItems = [
            - Mobile: full width/height, blue background
            - Desktop: centered column, blue background, rounded top corners,
              starts near top (larger gap to reduce height) and reaches bottom */
-        .container {
-          width: 100%;
-          background: #15375c !important;  /* ensure not overridden */
-          color: var(--text-blue);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 16px 16px 48px;
-        }
+.container {
+  width: 100%;
+  background: #15375c !important;  /* ensure not overridden */
+  color: var(--text-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 16px 48px;
+
+  /* ✅ make it scrollable */
+  overflow-y: auto;
+}
 
         /* Top bar */
 .topbar {
@@ -419,8 +422,8 @@ const gridItems = [
 }
 
 .heroLogo {
-  width: clamp(120px, 26vw, 180px);
-  height: clamp(120px, 26vw, 180px);
+  width: clamp(120px, 26vw, 140px);
+  height: clamp(120px, 26vw, 140px);
   object-fit: contain;            /* zoomed out: whole logo fits */
   border-radius: 9999px;          /* perfect circle */
   background: #ffffff;            /* white background fills any transparent space */
@@ -515,17 +518,19 @@ const gridItems = [
           .page {
             background: rgba(255, 255, 255, 0.07); /* white page background */
           }
-          .container {
-            width: min(92vw, 820px);
-     /* Key change: pin container to bottom, offset from top */
-    margin-top: 80px;                    /* push down from the top */
-    height: calc(100vh - 80px);          /* keep bottom fixed */
-            border-top-left-radius: 22px;
-            border-top-right-radius: 22px;
-            padding: 24px 24px 56px;
-            box-shadow: 0 18px 48px rgba(12, 113, 195, 0.22);
-            background: #15375c;
-          }
+  .container {
+    width: min(92vw, 820px);
+    margin-top: 80px;                   
+    height: calc(100vh - 80px);         
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+    padding: 24px 24px 56px;
+    box-shadow: 0 18px 48px rgba(12, 113, 195, 0.22);
+    background: #15375c;
+
+    /* ✅ scrolling still enabled */
+    overflow-y: auto;
+  }
         }
           @media (max-width: 640px) {
   .gridTitle {
